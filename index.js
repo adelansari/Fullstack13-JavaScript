@@ -1,16 +1,16 @@
-/*
-1. Fix the bugs in the codes below, to make the console print out different numbers
-from 0 to 100
- */
+// /*
+// 1. Fix the bugs in the codes below, to make the console print out different numbers
+// from 0 to 100
+//  */
 
-// Answer: declaring the variable as 'let' instead of 'var'
-const printNum = () => {
-    for (let i = 0; i <= 100; i++) {
-        setTimeout(() => console.log(i), 1000)
-    }
-}
+// // Answer: declaring the variable as 'let' instead of 'var'
+// const printNum = () => {
+//     for (let i = 0; i <= 100; i++) {
+//         setTimeout(() => console.log(i), 1000)
+//     }
+// }
 
-printNum()
+// printNum()
 
 
 /*
@@ -38,18 +38,25 @@ const fixDate = (array) => {
 let newArr = fixDate(myArr)
 console.log(newArr)
 
-// /*
-// 3. Counter function
-// Write a counter funtion to print out in console the time difference between 2 given date
-// Expected result in the console: 11 days - 13 hours - 38 minutes - 20 seconds
-// */
-// const dateFrom = new Date(500000)
-// const dateTo = new Date(1000000000)
-// const counter = (from, to) => {
-//     /* provide your code here */
-// }
-// const timer = counter()
-// console.log(timer)
+/*
+3. Counter function
+Write a counter funtion to print out in console the time difference between 2 given date
+Expected result in the console: 11 days - 13 hours - 38 minutes - 20 seconds
+*/
+const dateFrom = new Date(500000)
+const dateTo = new Date(1000000000)
+const counter = (from, to) => {
+    /* provide your code here */
+    const dataDays = Math.floor((dateTo.getTime()- dateFrom.getTime())/(1000 * 3600 * 24));
+    const dataHours = dateTo.getHours()- dateFrom.getHours();
+    const dataMinutes = dateTo.getMinutes()- dateFrom.getMinutes();
+    const dataSeconds = dateTo.getSeconds()- dateFrom.getSeconds();
+    const timerText = dataDays + " days - " + dataHours + " hours - " + dataMinutes + " minutes - " + dataSeconds + " seconds"
+
+    return timerText
+}
+const timer = counter()
+console.log(timer)
 
 // /* 
 // 4. Check the url and read documentation: https://restcountries.com
