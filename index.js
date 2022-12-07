@@ -47,15 +47,15 @@ const dateFrom = new Date(500000)
 const dateTo = new Date(1000000000)
 const counter = (from, to) => {
     /* provide your code here */
-    const dataDays = Math.floor((dateTo.getTime() - dateFrom.getTime()) / (1000 * 3600 * 24));
-    const dataHours = dateTo.getHours() - dateFrom.getHours();
-    const dataMinutes = dateTo.getMinutes() - dateFrom.getMinutes();
-    const dataSeconds = dateTo.getSeconds() - dateFrom.getSeconds();
-    const timerText = dataDays + " days - " + dataHours + " hours - " + dataMinutes + " minutes - " + dataSeconds + " seconds"
+    const dataDays = Math.floor((to.getTime() - from.getTime()) / (1000 * 3600 * 24));
+    const dataHours = to.getHours() - from.getHours();
+    const dataMinutes = to.getMinutes() - from.getMinutes();
+    const dataSeconds = to.getSeconds() - from.getSeconds();
+    const timerText = `${dataDays} days - ${dataHours} hours - ${dataMinutes} minutes - ${dataSeconds} seconds`;
 
     return timerText
 }
-const timer = counter()
+const timer = counter(dateFrom,dateTo)
 console.log(timer)
 
 /* 
@@ -99,29 +99,38 @@ const getSingleCountry = (countryInput) => {
             // googleMapFrame.src = googleMapUrl;
         })
 
-
-
 }
 
 getAllCountries()
 
-// /*
-// 5. Provide logic for function generateNewFolderName, which receive an array as argument. Everytime the function gets called,
-// it should check for folder name. If the folder named 'New Folder' does not exist, it should add the name 'New Folder' to array.
-// If folder 'New Folder' exists, it should add 'New Folder (1)' to array. If 'New Folder (1)' exists, it should add 'New Folder (2)'
-// to array, and so on.
-// */
+/*
+5. Provide logic for function generateNewFolderName, which receive an array as argument. Everytime the function gets called,
+it should check for folder name. If the folder named 'New Folder' does not exist, it should add the name 'New Folder' to array.
+If folder 'New Folder' exists, it should add 'New Folder (1)' to array. If 'New Folder (1)' exists, it should add 'New Folder (2)'
+to array, and so on.
+*/
 
-// const generateNewFolderName = (existingFolders) => {
-//     /*  provide your code here */
-// }
+const generateNewFolderName = (existingFolders) => {
+    /*  provide your code here */
+    const folderExist = existingFolders.includes('New Folder');
+    if(!folderExist) {
+        folder.push('New Folder')
+    } else {
+        for (let i = 0; i < existingFolders.length; i++) {
+            if (!existingFolders.includes(`New Folder (${i+1})`)) {
+                folder.push(`New Folder (${i+1})`);
+                break;
+            }
+        }
+    }
+}
 
-// let folder = []
-// generateNewFolderName(folder)
-// generateNewFolderName(folder)
-// generateNewFolderName(folder)
-// generateNewFolderName(folder)
-// console.log(folder); //expect to see ['New Folder', 'New Folder (1)', 'New Folder (2)', 'New Folder (3)']
+let folder = []
+generateNewFolderName(folder)
+generateNewFolderName(folder)
+generateNewFolderName(folder)
+generateNewFolderName(folder)
+console.log(folder); //expect to see ['New Folder', 'New Folder (1)', 'New Folder (2)', 'New Folder (3)']
 
 // /*
 // 6. Complete class Book:
