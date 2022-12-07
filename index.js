@@ -1,16 +1,16 @@
-// /*
-// 1. Fix the bugs in the codes below, to make the console print out different numbers
-// from 0 to 100
-//  */
+/*
+1. Fix the bugs in the codes below, to make the console print out different numbers
+from 0 to 100
+ */
 
-// // Answer: declaring the variable as 'let' instead of 'var'
-// const printNum = () => {
-//     for (let i = 0; i <= 100; i++) {
-//         setTimeout(() => console.log(i), 1000)
-//     }
-// }
+// Answer: declaring the variable as 'let' instead of 'var'
+const printNum = () => {
+    for (let i = 0; i <= 100; i++) {
+        setTimeout(() => console.log(i), 1000)
+    }
+}
 
-// printNum()
+printNum()
 
 
 /*
@@ -55,7 +55,7 @@ const counter = (from, to) => {
 
     return timerText
 }
-const timer = counter(dateFrom,dateTo)
+const timer = counter(dateFrom, dateTo)
 console.log(timer)
 
 /* 
@@ -113,12 +113,12 @@ to array, and so on.
 const generateNewFolderName = (existingFolders) => {
     /*  provide your code here */
     const folderExist = existingFolders.includes('New Folder');
-    if(!folderExist) {
+    if (!folderExist) {
         folder.push('New Folder')
     } else {
         for (let i = 0; i < existingFolders.length; i++) {
-            if (!existingFolders.includes(`New Folder (${i+1})`)) {
-                folder.push(`New Folder (${i+1})`);
+            if (!existingFolders.includes(`New Folder (${i + 1})`)) {
+                folder.push(`New Folder (${i + 1})`);
                 break;
             }
         }
@@ -132,28 +132,43 @@ generateNewFolderName(folder)
 generateNewFolderName(folder)
 console.log(folder); //expect to see ['New Folder', 'New Folder (1)', 'New Folder (2)', 'New Folder (3)']
 
-// /*
-// 6. Complete class Book:
-// - class Book should have 3 properties: title (read-only, must be a string but cannot be empty), cost (private, must be positive number) and profit (private, positive number > 0 and =< 0.5)
-// (error should be thrown if data is not valid)
-// - give the logic to get book's price and profit separately.
-// - give the logics to increase and decrease the price with a certain amount
-// - give the logic to calculate price based on cost and profit. For example: cost 14, profit 0.3 => expected price is 20.
+/*
+6. Complete class Book:
+- class Book should have 3 properties: title (read-only, must be a string but cannot be empty), cost (private, must be positive number) and profit (private, positive number > 0 and =< 0.5)
+(error should be thrown if data is not valid)
+- give the logic to get book's price and profit separately.
+- give the logics to increase and decrease the price with a certain amount
+- give the logic to calculate price based on cost and profit. For example: cost 14, profit 0.3 => expected price is 20.
 
-// Complete class TaxableBook:
-// - inherit Book, but have 1 more private parameter in the constructor: taxRate.
-// - give the logic to calculate price with taxRate. For example:
-// cost 14, profit 0.3 , tax 24% => expected price is 30.43
-// */
-// class Book {
-//     _title
-//     constructor(title, cost, profit) {
-//     }
-// }
+Complete class TaxableBook:
+- inherit Book, but have 1 more private parameter in the constructor: taxRate.
+- give the logic to calculate price with taxRate. For example:
+cost 14, profit 0.3 , tax 24% => expected price is 30.43
+*/
+class Book {
+    _title
+    constructor(title, cost, profit, price) {
+        if (typeof title !== 'string' || title.length === 0) {
+            throw new Error("⛔️ title property cannot be empty/must be a string.")
+        } else if (!(cost > 0)) {
+            throw new Error('⛔️ cost must be a positive number');
+        } else if (!(profit > 0 && profit <= 0.5)) {
+            throw new Error('⛔️ profit must stonks and be a positive number > 0 and <= 0.5');
+        } else {
+            this._title = title;
+            this.cost = cost;
+            this.profit = profit;
 
-// class TaxableBook {
-//     /* provide your code here */
-// }
+            const price = cost/(1-profit);
+            this.price = price;
+        }
 
-// const book1 = new Book("The Power of Habits", 14, 0.3)
-// const book2 = new TaxableBook("The Power of Habits", 14, 0.3, 24)
+    }
+}
+
+class TaxableBook {
+    /* provide your code here */
+}
+
+const book1 = new Book("The Power of Habits", 14, 0.3)
+const book2 = new TaxableBook("The Power of Habits", 14, 0.3, 24)
