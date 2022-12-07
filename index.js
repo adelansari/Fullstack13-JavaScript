@@ -29,7 +29,7 @@ const fixDate = (array) => {
     /* provide your code here */
     for (let iDate = 0; iDate < myArr.length; iDate++) {
         const dateSplit = myArr[iDate].split('-');
-        dateSplit.sort(function(a, b){return a-b});
+        dateSplit.sort(function (a, b) { return a - b });
         const dataOrder = [dateSplit[1], dateSplit[0], dateSplit[2]].join("-");
         myArr[iDate] = dataOrder;
     }
@@ -47,10 +47,10 @@ const dateFrom = new Date(500000)
 const dateTo = new Date(1000000000)
 const counter = (from, to) => {
     /* provide your code here */
-    const dataDays = Math.floor((dateTo.getTime()- dateFrom.getTime())/(1000 * 3600 * 24));
-    const dataHours = dateTo.getHours()- dateFrom.getHours();
-    const dataMinutes = dateTo.getMinutes()- dateFrom.getMinutes();
-    const dataSeconds = dateTo.getSeconds()- dateFrom.getSeconds();
+    const dataDays = Math.floor((dateTo.getTime() - dateFrom.getTime()) / (1000 * 3600 * 24));
+    const dataHours = dateTo.getHours() - dateFrom.getHours();
+    const dataMinutes = dateTo.getMinutes() - dateFrom.getMinutes();
+    const dataSeconds = dateTo.getSeconds() - dateFrom.getSeconds();
     const timerText = dataDays + " days - " + dataHours + " hours - " + dataMinutes + " minutes - " + dataSeconds + " seconds"
 
     return timerText
@@ -58,22 +58,52 @@ const counter = (from, to) => {
 const timer = counter()
 console.log(timer)
 
-// /* 
-// 4. Check the url and read documentation: https://restcountries.com
-// - Write a function to get all countries, sorted in alphabetical order
-// - Write a function to find one country based on the search input
-// The data fetched from url should be displayed in index.html.
-// */
+/* 
+4. Check the url and read documentation: https://restcountries.com
+- Write a function to get all countries, sorted in alphabetical order
+- Write a function to find one country based on the search input
+The data fetched from url should be displayed in index.html.
+*/
 
-// const getAllCountries = () => {
-//     /* provide your code here */
-// }
+const getAllCountries = () => {
+    /* provide your code here */
+    const allCountriesUrl = "https://restcountries.com/v3.1/all?fields=name"
+    fetch(allCountriesUrl)
+        .then(res => res.json())
+        .then((data) => {
+            let countryNames = [];  // initializing an array to store country names
+            data.forEach(dataObj => {
+                countryNames.push(...[dataObj.name.common]);  // separating country name from the rest of the data and appending it to countryNames array
+            });
+            const countriesSorted = countryNames.sort(); // sorting country names alphabetically in the array
+            console.log(countriesSorted)
+        })
+        .catch(() => {
+            console.log("There was an error in fetching the country names.")
+        });
+}
 
-// const getSingleCountry = () => {
-//     /* provide your code here */
-// }
+const getSingleCountry = (countryInput) => {
+    /* provide your code here */
+    const singleCountryUrl = "https://restcountries.com/v3.1/name/" + countryInput  // adding the searched country name to url
+    fetch(singleCountryUrl)
+        .then(res => res.json())
+        .then((data) => {
+            const countryName = data[0].name.common;
+            const countryFullName = data[0].name.official;
+            const countryFlag = data[0].flags.png;
 
-// getAllCountries()
+            // To embed google map based on the countryName. For the sake of this assignment, I have decided to remove the api key.
+            // const googleMapUrl = "https://www.google.com/maps/embed/v1/place?q=" + countryName + "&key=" + googleApiKEY;
+            // googleMapFrame = document.getElementById("googleMap");
+            // googleMapFrame.src = googleMapUrl;
+        })
+
+
+
+}
+
+getAllCountries()
 
 // /*
 // 5. Provide logic for function generateNewFolderName, which receive an array as argument. Everytime the function gets called,
@@ -93,17 +123,17 @@ console.log(timer)
 // generateNewFolderName(folder)
 // console.log(folder); //expect to see ['New Folder', 'New Folder (1)', 'New Folder (2)', 'New Folder (3)']
 
-// /* 
+// /*
 // 6. Complete class Book:
 // - class Book should have 3 properties: title (read-only, must be a string but cannot be empty), cost (private, must be positive number) and profit (private, positive number > 0 and =< 0.5)
 // (error should be thrown if data is not valid)
 // - give the logic to get book's price and profit separately.
-// - give the logics to increase and decrease the price with a certain amount 
+// - give the logics to increase and decrease the price with a certain amount
 // - give the logic to calculate price based on cost and profit. For example: cost 14, profit 0.3 => expected price is 20.
 
-// Complete class TaxableBook: 
-// - inherit Book, but have 1 more private parameter in the constructor: taxRate. 
-// - give the logic to calculate price with taxRate. For example: 
+// Complete class TaxableBook:
+// - inherit Book, but have 1 more private parameter in the constructor: taxRate.
+// - give the logic to calculate price with taxRate. For example:
 // cost 14, profit 0.3 , tax 24% => expected price is 30.43
 // */
 // class Book {

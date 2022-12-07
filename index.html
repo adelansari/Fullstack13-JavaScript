@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,12 +8,32 @@
     <link rel="stylesheet" href="style.css">
     <title>Document</title>
 </head>
+
 <body>
     <!-- Question 4 in index.js
         * write form with input and search button to search and display the found/notfound country
         * use grid to display all the countries fetched from the given url
         * no extra library, only vanilla CSS or SASS. Be creative in your own layout
      -->
+    <form>
+        <fieldset>
+            <legend>REST Countries</legend>
+            <div>
+                <input type="text" id="countryId" placeholder="Enter a country name">
+                <input type="button" value="search" class="searchButton"
+                    onClick="getSingleCountry(document.getElementById('countryId').value);">
+            </div>
+            
+            <!-- I was testing if I can embed google map from the search result and it works. -->
+            <!-- <iframe id="googleMap" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade">
+            </iframe> -->
+
+        </fieldset>
+
+    </form>
+
     <script src="index.js"></script>
 </body>
+
 </html>
