@@ -29,9 +29,11 @@ const fixDate = (array) => {
     /* provide your code here */
     for (let iDate = 0; iDate < myArr.length; iDate++) {
         const dateSplit = myArr[iDate].split('-');
-        [dateSplit[0],dateSplit[1]] = [dateSplit[1],dateSplit[0]]
-        console.log('dateSplit',dateSplit);
+        dateSplit.sort(function(a, b){return a-b});
+        const dataOrder = [dateSplit[1], dateSplit[0], dateSplit[2]].join("-");
+        myArr[iDate] = dataOrder;
     }
+    return myArr;
 }
 let newArr = fixDate(myArr)
 console.log(newArr)
