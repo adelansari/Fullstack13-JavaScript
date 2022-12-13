@@ -47,7 +47,7 @@ const dateFrom = new Date(500000)
 const dateTo = new Date(1000000000)
 const counter = (from, to) => {
     /* provide your code here */
-    const dataDays = Math.floor((to.getTime() - from.getTime()) / (1000 * 3600 * 24));
+    const dataDays = to.getDate() - from.getDate();
     const dataHours = to.getHours() - from.getHours();
     const dataMinutes = to.getMinutes() - from.getMinutes();
     const dataSeconds = to.getSeconds() - from.getSeconds();
@@ -73,7 +73,7 @@ const getAllCountries = () => {
         .then((data) => {
             let countryNames = [];  // initializing an array to store country names
             data.forEach(dataObj => {
-                countryNames.push(...[dataObj.name.common]);  // separating country name from the rest of the data and appending it to countryNames array
+                countryNames.push(dataObj.name.common);  // separating country name from the rest of the data and appending it to countryNames array
             });
             const countriesSorted = countryNames.sort(); // sorting country names alphabetically in the array
             console.log(countriesSorted)
@@ -92,12 +92,16 @@ const getSingleCountry = (countryInput) => {
             const countryName = data[0].name.common;
             const countryFullName = data[0].name.official;
             const countryFlag = data[0].flags.png;
-
-            // To embed google map based on the countryName. For the sake of this assignment, I have decided to remove the api key.
-            // const googleMapUrl = "https://www.google.com/maps/embed/v1/place?q=" + countryName + "&key=" + googleApiKEY;
-            // googleMapFrame = document.getElementById("googleMap");
-            // googleMapFrame.src = googleMapUrl;
+            
+            // To embed google map based on the countryName
+            const googleMapUrl = `https://maps.google.com/maps?width=100%25&height=600&hl=en&q=${countryName}&output=embed`;
+            console.log(googleMapUrl)
+            googleMapFrame = document.getElementById("googleMap");
+            googleMapFrame.src = googleMapUrl;
         })
+        .catch(() => {
+            console.log("Please enter a correct country name.")
+        });
 
 }
 
@@ -165,6 +169,11 @@ class Book {
 
     }
 }
+
+// price = price*24% + cost + price*0.3
+// Cost/(1-profit - tax rate/100)
+
+
 
 class TaxableBook {
     /* provide your code here */
