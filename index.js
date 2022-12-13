@@ -92,7 +92,7 @@ const getSingleCountry = (countryInput) => {
             const countryName = data[0].name.common;
             const countryFullName = data[0].name.official;
             const countryFlag = data[0].flags.png;
-            
+
             // To embed google map based on the countryName
             const googleMapUrl = `https://maps.google.com/maps?width=100%25&height=600&hl=en&q=${countryName}&output=embed`;
             console.log(googleMapUrl)
@@ -150,8 +150,11 @@ Complete class TaxableBook:
 cost 14, profit 0.3 , tax 24% => expected price is 30.43
 */
 class Book {
-    _title
-    constructor(title, cost, profit, price) {
+    _title;
+    #cost;
+    #profit;
+    #price;
+    constructor(title, cost, profit) {
         if (typeof title !== 'string' || title.length === 0) {
             throw new Error("⛔️ title property cannot be empty/must be a string.")
         } else if (!(cost > 0)) {
@@ -160,24 +163,63 @@ class Book {
             throw new Error('⛔️ profit must stonks and be a positive number > 0 and <= 0.5');
         } else {
             this._title = title;
-            this.cost = cost;
-            this.profit = profit;
-
-            const price = cost/(1-profit);
-            this.price = price;
+            this.#cost = cost;
+            this.#profit = profit;
+            this.#price = this.calculatePrice().toFixed(2);
         }
 
     }
+    calculatePrice() {
+        return this.#cost / (1 - this.#profit);
+    }
+    get bookTitle() {
+        return this._title
+    }
+    get bookPrice() {
+        return this.#price
+    }
+    get bookProfit() {
+        return this.#profit
+    }
+    set increasePrice(amount) {
+        this.#price += amount;
+    }
+    set decreasePrice(amount) {
+        this.#price -= amount;
+    }
 }
 
-// price = price*24% + cost + price*0.3
-// Cost/(1-profit - tax rate/100)
+class TaxableBook extends Book {
+    #taxRate;
+    #price;
 
-
-
-class TaxableBook {
-    /* provide your code here */
+    constructor(title, cost, profit, taxRate) {
+        super(title, cost, profit);
+        if (!(taxRate > 0)) {
+            throw new Error("⛔️ taxRate must be a positive number");
+        } else {
+            this.#taxRate = taxRate;
+            this.#price = (cost / (1 - profit - this.#taxRate / 100)).toFixed(2);
+        }
+    }
+    get textableBookTitle() {
+        return this._title
+    }
+    get taxRate() {
+        return this.#taxRate;
+    }
+    get priceTaxed() {
+        return this.#price;
+    }
 }
 
 const book1 = new Book("The Power of Habits", 14, 0.3)
+console.log(`${book1.bookTitle} price = ${book1.bookPrice}`);
+console.log(`${book1.bookTitle} price = ${book1.bookProfit}`);
+book1.increasePrice = 3;
+console.log(`${book1.bookTitle} new price= ${book1.bookPrice}`);
+book1.decreasePrice = 2;
+console.log(`${book1.bookTitle} new price ${book1.bookPrice}`);
+
 const book2 = new TaxableBook("The Power of Habits", 14, 0.3, 24)
+console.log(`${book2.textableBookTitle} price with ${book2.taxRate}% tax is ${book2.priceTaxed}`);
