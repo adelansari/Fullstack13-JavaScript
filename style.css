@@ -1,0 +1,37 @@
+* {
+    padding: 0;
+    margin: 0.5em;
+}
+
+body {
+    background-color: rgb(32, 29, 29);
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 20px;
+    color: white;
+}
+
+/* .single-country{
+
+} */
+
+.single-country__result {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    gap: 0px 10px;
+    grid-template-areas:
+        "googlemap result";
+    justify-content: center;
+    justify-items: center;
+
+}
+
+.result__map {
+    grid-area: googlemap;
+}
+
+.result__country-data {
+    grid-area: result;
+}

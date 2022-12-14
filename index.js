@@ -83,8 +83,9 @@ const getAllCountries = () => {
         });
 }
 
-const getSingleCountry = (countryInput) => {
+const getSingleCountry = () => {
     /* provide your code here */
+    let countryInput = document.getElementById('countryName').value;
     const singleCountryUrl = "https://restcountries.com/v3.1/name/" + countryInput  // adding the searched country name to url
     fetch(singleCountryUrl)
         .then(res => res.json())
@@ -116,13 +117,14 @@ to array, and so on.
 
 const generateNewFolderName = (existingFolders) => {
     /*  provide your code here */
-    const folderExist = existingFolders.includes('New Folder');
+    let folderName = "New Folder";
+    const folderExist = existingFolders.includes(folderName);
     if (!folderExist) {
-        folder.push('New Folder')
+        folder.push(folderName)
     } else {
         for (let i = 0; i < existingFolders.length; i++) {
-            if (!existingFolders.includes(`New Folder (${i + 1})`)) {
-                folder.push(`New Folder (${i + 1})`);
+            if (!existingFolders.includes(`${folderName} (${i + 1})`)) {
+                folder.push(`${folderName} (${i + 1})`);
                 break;
             }
         }
@@ -192,7 +194,6 @@ class Book {
 class TaxableBook extends Book {
     #taxRate;
     #price;
-
     constructor(title, cost, profit, taxRate) {
         super(title, cost, profit);
         if (!(taxRate > 0)) {

@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <title>Document</title>
+    <title>document</title>
 </head>
 
 <body>
@@ -15,23 +15,50 @@
         * use grid to display all the countries fetched from the given url
         * no extra library, only vanilla CSS or SASS. Be creative in your own layout
      -->
-    <form>
-        <fieldset>
-            <legend>Country Data</legend>
+    <h1> Single Country Search</h1>
+    <hr>
+    <div class="single-country">
+        <form class="single-country__search" action="" onsubmit="getSingleCountry(); return false">
             <div>
-                <input type="text" id="countryId" placeholder="Enter a country name">
-                <input type="button" value="search" class="searchButton"
-                    onClick="getSingleCountry(document.getElementById('countryId').value);">
+                <input type="text" id="countryName" placeholder="Enter a country name..." required>
+                <input type="submit" value="search">
             </div>
+        </form>
+        <form class="single-country__result">
+            <div class="result__map">
+                <iframe id="googleMap" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+            <div class="result__country-data">
+                <div>hi there.</div>
+                <div>testing</div>
+            </div>
+        </form>
+    </div>
 
-            <!-- I was testing if I can embed google map from the search result and it works. -->
-            <iframe id="googleMap" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
-                referrerpolicy="no-referrer-when-downgrade">
-            </iframe>
+    <div class="all-countries">
+        <form class="single-country__search" action="" onsubmit="getSingleCountry(); return false">
+            <div>
+                <input type="text" id="countryName" placeholder="Enter a country name..." required>
+                <input type="submit" value="search">
+            </div>
+        </form>
+        <form class="single-country__result">
+            <div class="result__map">
+                <iframe id="googleMap" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+            <div class="result__country-data">
+                <div>hi there.</div>
+                <div>testing</div>
+            </div>
+        </form>
+    </div>
 
-        </fieldset>
+    
 
-    </form>
 
     <script src="index.js"></script>
 </body>
