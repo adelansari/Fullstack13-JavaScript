@@ -26,6 +26,7 @@ Check out my website here: https://adelansari.github.io/Fullstack13-JavaScript/
 ```
 📦.
  ┣ 📜countriesJavascriptAPI.JPG
+ ┣ 📜countyJavascriptAPI.JPG
  ┣ 📜index.html
  ┣ 📜index.js
  ┣ 📜README.md
