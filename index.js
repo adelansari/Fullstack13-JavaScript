@@ -66,10 +66,10 @@ The data fetched from url should be displayed in index.html.
 */
 
 // Returning elements using query selector
-const singleCountryClass = document.querySelector('.single-country');
+const singleCountryResult = document.querySelector('.single-country__result');
 const searchInput = document.querySelector('.single-country__input');
 const searchBtn = document.querySelector('.single-country__btn');
-const allCountriesClass = document.querySelector('.all-countries');
+const allCountriesResult = document.querySelector('.all-countries__result');
 
 const countriesUrl = "https://restcountries.com/v3.1"
 
@@ -96,8 +96,8 @@ searchBtn.addEventListener('click', (e) => {
 
 const getSingleCountry = (countryInput) => {
     /* provide your code here */
-    if(singleCountryClass.hasChildNodes()) {
-        singleCountryClass.removeChild(singleCountryClass.firstChild);
+    if(singleCountryResult.hasChildNodes()) {
+        singleCountryResult.removeChild(singleCountryResult.firstChild);
     }
     const singleCountryUrl = `${countriesUrl}/name/${countryInput}`  // adding the searched country name to url
     fetch(singleCountryUrl)
@@ -118,10 +118,11 @@ const getSingleCountry = (countryInput) => {
             // googleMapFrame = document.getElementById("googleMap");
             // googleMapFrame.src = googleMapUrl;
         })
-        .catch(() => {
+        .catch((e) => {
             const errorMsg = document.createElement('h2');
-            errorMsg.innerHTML = `Please enter a correct <b>country name.</b>`
-            singleCountryClass.append(errorMsg)
+            errorMsg.innerHTML = `Please enter a correct country name.</b>`
+            singleCountryResult.append(errorMsg)
+            console.log(e)
         });
 }
 
@@ -131,7 +132,7 @@ const createCountryInfo = (data, args) => {
     const flagSrc = data.flags.png;
     countryFlag.setAttribute('src', flagSrc);
     const countryName = document.createElement('h2');
-    countryName.innerHTML = `${data.name.common} ${item.flag}`;
+    countryName.innerHTML = `${data.name.common} ${data.flag}`;
     switch (args) {
         case 'all':
             div.append(countryFlag, countryName);
