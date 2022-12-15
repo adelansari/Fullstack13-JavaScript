@@ -65,45 +65,93 @@ console.log(timer)
 The data fetched from url should be displayed in index.html.
 */
 
+// Returning elements using query selector
+const singleCountryClass = document.querySelector('.single-country');
+const searchInput = document.querySelector('.single-country__input');
+const searchBtn = document.querySelector('.single-country__btn');
+const allCountriesClass = document.querySelector('.all-countries');
+
+const countriesUrl = "https://restcountries.com/v3.1"
+
 const getAllCountries = () => {
     /* provide your code here */
-    const allCountriesUrl = "https://restcountries.com/v3.1/all?fields=name"
+    const allCountriesUrl = `${countriesUrl}/all`;
     fetch(allCountriesUrl)
         .then(res => res.json())
         .then((data) => {
-            let countryNames = [];  // initializing an array to store country names
-            data.forEach(dataObj => {
-                countryNames.push(dataObj.name.common);  // separating country name from the rest of the data and appending it to countryNames array
-            });
-            const countriesSorted = countryNames.sort(); // sorting country names alphabetically in the array
-            console.log(countriesSorted)
+            data.sort((a, b) => {
+                return a.name.common.localeCompare(b.name.common)
+            })
         })
         .catch(() => {
             console.log("There was an error in fetching the country names.")
         });
 }
 
-const getSingleCountry = () => {
+// Event listener for single country:
+searchBtn.addEventListener('click', (e) => {
+    e.preventDefault()
+    getSingleCountry(searchInput.value)
+})
+
+const getSingleCountry = (countryInput) => {
     /* provide your code here */
-    let countryInput = document.getElementById('countryName').value;
-    const singleCountryUrl = "https://restcountries.com/v3.1/name/" + countryInput  // adding the searched country name to url
+    if(singleCountryClass.hasChildNodes()) {
+        singleCountryClass.removeChild(singleCountryClass.firstChild);
+    }
+    const singleCountryUrl = `${countriesUrl}/name/${countryInput}`  // adding the searched country name to url
     fetch(singleCountryUrl)
         .then(res => res.json())
         .then((data) => {
-            const countryName = data[0].name.common;
-            const countryFullName = data[0].name.official;
-            const countryFlag = data[0].flags.png;
+            const divMap = document.createElement('div');
+            var ifrmMap = document.createElement("iframe")
+            ifrmMap.setAttribute("src", `https://maps.google.com/maps?width=100%25&height=600&hl=en&q=${data[0].name.common}&output=embed`);
+            divMap.className = "result__map"
+            divMap.append(ifrmMap);
+            
+            const divSingle = createCountryInfo(data[0], 'single');
+            divSingle.classList.add('single-country__result');
 
-            // To embed google map based on the countryName
-            const googleMapUrl = `https://maps.google.com/maps?width=100%25&height=600&hl=en&q=${countryName}&output=embed`;
-            console.log(googleMapUrl)
-            googleMapFrame = document.getElementById("googleMap");
-            googleMapFrame.src = googleMapUrl;
+            // // To embed google map based on the countryName
+            // const googleMapUrl = `https://maps.google.com/maps?width=100%25&height=600&hl=en&q=${countryName}&output=embed`;
+            // console.log(googleMapUrl)
+            // googleMapFrame = document.getElementById("googleMap");
+            // googleMapFrame.src = googleMapUrl;
         })
         .catch(() => {
-            console.log("Please enter a correct country name.")
+            const errorMsg = document.createElement('h2');
+            errorMsg.innerHTML = `Please enter a correct <b>country name.</b>`
+            singleCountryClass.append(errorMsg)
         });
+}
 
+const createCountryInfo = (data, args) => {
+    const div = document.createElement('div');
+    const countryFlag = document.createElement('img');
+    const flagSrc = data.flags.png;
+    countryFlag.setAttribute('src', flagSrc);
+    const countryName = document.createElement('h2');
+    countryName.innerHTML = `${data.name.common} ${item.flag}`;
+    switch (args) {
+        case 'all':
+            div.append(countryFlag, countryName);
+            div.className ='all-countries__result'
+            break;
+        case 'single':
+            const countryFullName = document.createElement('h3');
+            countryFullName.innerHTML = `${data.name.official}`;
+            const capital = document.createElement('p');
+            capital.innerHTML = `Capital: <b>${data.capital}</b>`;
+            const languages = document.createElement('p');
+            const allLang = Object.values(data.languages).join(', ')
+            languages.innerHTML = `Languages: <b>${allLang}</b>`;
+            const population = document.createElement('p');
+            population.innerHTML = `Population: <b>${data.population}</b>`;
+            div.append(countryFlag, countryName, countryFullName, capital, languages, population, population);
+            div.className = 'result__country-data'
+            break;
+    }
+    return div;
 }
 
 getAllCountries()
@@ -169,7 +217,6 @@ class Book {
             this.#profit = profit;
             this.#price = this.calculatePrice().toFixed(2);
         }
-
     }
     calculatePrice() {
         return this.#cost / (1 - this.#profit);
@@ -183,11 +230,20 @@ class Book {
     get bookProfit() {
         return this.#profit
     }
-    set increasePrice(amount) {
-        this.#price += amount;
+    // logics to increase and decrease the price
+    increasePrice(amount) {
+        if (!(amount < 0)) {
+            this.#price += amount;
+        } else {
+            console.log("⛔️ The increment number should be positive.")
+        }
     }
-    set decreasePrice(amount) {
-        this.#price -= amount;
+    decreasePrice(amount) {
+        if (!(amount < 0)) {
+            this.#price -= amount;
+        } else {
+            this.#price += amount;
+        }
     }
 }
 
@@ -216,11 +272,11 @@ class TaxableBook extends Book {
 
 const book1 = new Book("The Power of Habits", 14, 0.3)
 console.log(`${book1.bookTitle} price = ${book1.bookPrice}`);
-console.log(`${book1.bookTitle} price = ${book1.bookProfit}`);
-book1.increasePrice = 3;
+console.log(`${book1.bookTitle} profit = ${book1.bookProfit}`);
+book1.increasePrice(-10);
 console.log(`${book1.bookTitle} new price= ${book1.bookPrice}`);
-book1.decreasePrice = 2;
-console.log(`${book1.bookTitle} new price ${book1.bookPrice}`);
+book1.decreasePrice(3);
+console.log(`${book1.bookTitle} new price = ${book1.bookPrice}`);
 
 const book2 = new TaxableBook("The Power of Habits", 14, 0.3, 24)
 console.log(`${book2.textableBookTitle} price with ${book2.taxRate}% tax is ${book2.priceTaxed}`);
