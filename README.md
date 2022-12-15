@@ -39,6 +39,8 @@ Check out my website here: https://adelansari.github.io/Fullstack13-JavaScript/
 
 ## Result
 
-<p align="center">
-   <img src="countriesJavascriptAPI.JPG" alt="fetched-countries"/>
-</p>
+• Default view:
+<p align="center"><img src="countriesJavascriptAPI.JPG" alt="fetched-countries"/></p>
+
+• Result from seaching a country name:
+<p align="center"><img src="countyJavascriptAPI.JPG" alt="fetched-country"/></p>
