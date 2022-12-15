@@ -13,7 +13,6 @@ Check out my website here: https://adelansari.github.io/Fullstack13-JavaScript/
   - [Project structure](#project-structure)
   - [Getting Started](#getting-started)
   - [Result](#result)
-  - [Resources](#resources)
 
 ## Technologies
 
