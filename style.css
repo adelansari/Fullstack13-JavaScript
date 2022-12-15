@@ -10,10 +10,6 @@ body {
     color: white;
 }
 
-/* .single-country{
-
-} */
-
 .single-country__result {
     display: grid;
     grid-auto-flow: column;
@@ -25,13 +21,64 @@ body {
         "googlemap result";
     justify-content: center;
     justify-items: center;
-
 }
 
 .result__map {
     grid-area: googlemap;
+    width: 90%;
+    height: 90%;
 }
 
-.result__country-data {
+.single-country__result__country {
     grid-area: result;
+    padding: 10px 10px;
+    border: 2px solid white;
+    border-radius: 15px;
+}
+
+.error {
+    color: red;
+}
+
+.all-countries__result {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+}
+
+.all-countries__result__country {
+    padding: 10px 10px;
+    border: 2px solid white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 15px;
+    transition: all 0.2s linear;
+}
+
+.all-countries__result__country:hover {
+    border: 2px solid rgb(22, 173, 153);
+    transform: translateY(-5px);
+}
+
+.single-country__btn {
+    width: 100px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    background-color: rgb(59, 59, 59);
+    transition: all 0.2s linear;
+    cursor: pointer;
+}
+
+.single-country__btn:hover {
+    background-color: rgb(22, 173, 153);
+}
+
+single-country__input {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 10px;
+    color: white;
 }

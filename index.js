@@ -82,6 +82,11 @@ const getAllCountries = () => {
             data.sort((a, b) => {
                 return a.name.common.localeCompare(b.name.common)
             })
+            data.forEach(country => {
+                const divAll = createCountryInfo(country, 'all');
+                divAll.classList.add('all-countries__result__country');
+                allCountriesResult.append(divAll);
+            })
         })
         .catch(() => {
             console.log("There was an error in fetching the country names.")
@@ -91,37 +96,40 @@ const getAllCountries = () => {
 // Event listener for single country:
 searchBtn.addEventListener('click', (e) => {
     e.preventDefault()
-    getSingleCountry(searchInput.value)
+    if (searchInput.value.length !== 0) {
+        searchInput.removeAttribute("style")
+        getSingleCountry(searchInput.value)
+    } else {
+        alert("Please input a country name.")
+        searchInput.style.border = "3px solid red";
+        searchInput.style.background = "yellow";
+    }
 })
 
 const getSingleCountry = (countryInput) => {
     /* provide your code here */
-    if(singleCountryResult.hasChildNodes()) {
+    while (singleCountryResult.hasChildNodes()) {
         singleCountryResult.removeChild(singleCountryResult.firstChild);
     }
     const singleCountryUrl = `${countriesUrl}/name/${countryInput}`  // adding the searched country name to url
     fetch(singleCountryUrl)
         .then(res => res.json())
         .then((data) => {
-            const divMap = document.createElement('div');
+            // first column: embeding google map:
             var ifrmMap = document.createElement("iframe")
-            ifrmMap.setAttribute("src", `https://maps.google.com/maps?width=100%25&height=600&hl=en&q=${data[0].name.common}&output=embed`);
-            divMap.className = "result__map"
-            divMap.append(ifrmMap);
-            
-            const divSingle = createCountryInfo(data[0], 'single');
-            divSingle.classList.add('single-country__result');
+            ifrmMap.src = `https://maps.google.com/maps?hl=en&q=${data[0].name.common}&output=embed`;
+            ifrmMap.className = "result__map"
+            singleCountryResult.append(ifrmMap)
 
-            // // To embed google map based on the countryName
-            // const googleMapUrl = `https://maps.google.com/maps?width=100%25&height=600&hl=en&q=${countryName}&output=embed`;
-            // console.log(googleMapUrl)
-            // googleMapFrame = document.getElementById("googleMap");
-            // googleMapFrame.src = googleMapUrl;
+            // second column: country info
+            const divSingle = createCountryInfo(data[0], 'single');
+            singleCountryResult.append(divSingle);
         })
         .catch((e) => {
-            const errorMsg = document.createElement('h2');
-            errorMsg.innerHTML = `Please enter a correct country name.</b>`
-            singleCountryResult.append(errorMsg)
+            const errorMsg = document.createElement('h3');
+            errorMsg.innerHTML = `Please enter a correct country name.`
+            errorMsg.className = 'error'
+            singleCountryResult.append(errorMsg);
             console.log(e)
         });
 }
@@ -130,13 +138,13 @@ const createCountryInfo = (data, args) => {
     const div = document.createElement('div');
     const countryFlag = document.createElement('img');
     const flagSrc = data.flags.png;
-    countryFlag.setAttribute('src', flagSrc);
+    countryFlag.src = flagSrc;
     const countryName = document.createElement('h2');
     countryName.innerHTML = `${data.name.common} ${data.flag}`;
     switch (args) {
         case 'all':
             div.append(countryFlag, countryName);
-            div.className ='all-countries__result'
+            div.className = 'all-countries__result__country'
             break;
         case 'single':
             const countryFullName = document.createElement('h3');
@@ -149,7 +157,7 @@ const createCountryInfo = (data, args) => {
             const population = document.createElement('p');
             population.innerHTML = `Population: <b>${data.population}</b>`;
             div.append(countryFlag, countryName, countryFullName, capital, languages, population, population);
-            div.className = 'result__country-data'
+            div.className = 'single-country__result__country'
             break;
     }
     return div;
