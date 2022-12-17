@@ -24,12 +24,16 @@ Check out my website here: https://adelansari.github.io/Fullstack13-JavaScript/
 
 ```
 📦.
- ┣ 📜countriesJavascriptAPI.JPG
- ┣ 📜countyJavascriptAPI.JPG
+ ┣ 📂assets
+ ┃ ┣ 📜countrySearchFail.JPG
+ ┃ ┣ 📜countrySearchNoInput.JPG
+ ┃ ┣ 📜countrySearchSuccess.JPG
+ ┃ ┗ 📜defaultCountryView.JPG
+ ┣ 📂style
+ ┃ ┗ 📜style.css
  ┣ 📜index.html
  ┣ 📜index.js
- ┣ 📜README.md
- ┗ 📜style.css
+ ┗ 📜README.md
 ```
 
 ## Getting Started
@@ -39,8 +43,14 @@ Check out my website here: https://adelansari.github.io/Fullstack13-JavaScript/
 
 ## Result
 
-• Default view:
-<p align="center"><img src="countriesJavascriptAPI.JPG" alt="fetched-countries"/></p>
+### Default view:
+<p align="center"><img src="assets/defaultCountryView.JPG" alt="default-view"/></p>
 
-• Result from seaching a country name:
-<p align="center"><img src="countyJavascriptAPI.JPG" alt="fetched-country"/></p>
+### Result from seaching a country name:
+<p align="center"><img src="assets/countrySearchSuccess.JPG" alt="fetched-country"/></p>
+
+### Error if country name is not found:
+<p align="center"><img src="assets/countrySearchFail.JPG" alt="failed-fetch"/></p>
+
+### Error if input box is empty:
+<p align="center"><img src="assets/countrySearchNoInput.JPG" alt="empty-input"/></p>

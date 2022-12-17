@@ -106,6 +106,18 @@ searchBtn.addEventListener('click', (e) => {
     }
 })
 
+// After everything is loaded
+window.onload = function () {
+    // Extracting a country name by click
+    let idCountry = document.querySelectorAll('.all-countries__result__country');
+    idCountry.forEach(element => element.addEventListener('click', function(){
+        searchInput.removeAttribute("style")
+        let countryClicked = element.lastChild.innerHTML.split("<")[0]
+        window.scrollTo(0, 0);  // scroll to the top of the page
+        getSingleCountry(countryClicked);  // show the country in the single country search container
+    }))
+}
+
 const getSingleCountry = (countryInput) => {
     /* provide your code here */
     while (singleCountryResult.hasChildNodes()) {
@@ -143,9 +155,10 @@ const createCountryInfo = (data, args) => {
     countryFlag.src = flagSrc;
     countryFlag.style.maxWidth = "95%"
     countryFlag.style.width = "300px"
-    countryFlag.style.height = "200px"
+    countryFlag.style.height = "150px"
     const countryName = document.createElement('h2');
-    countryName.innerHTML = `${data.name.common} ${data.flag}`;
+    countryName.id = "id-country";
+    countryName.innerHTML = `${data.name.common}<span> ${data.flag}</span>`;
     switch (args) {
         case 'all':
             div.append(countryFlag, countryName);
@@ -160,7 +173,7 @@ const createCountryInfo = (data, args) => {
             const allLang = Object.values(data.languages).join(', ')
             languages.innerHTML = `Languages: ${allLang}`;
             const population = document.createElement('p');
-            population.innerHTML = `Population: ${(data.population/1e06).toFixed(2)} M`;
+            population.innerHTML = `Population: ${(data.population / 1e06).toFixed(2)} M`;
             div.append(countryFlag, countryName, countryFullName, capital, languages, population, population);
             div.className = 'single-country__result__country'
             break;
@@ -207,7 +220,7 @@ console.log(folder); //expect to see ['New Folder', 'New Folder (1)', 'New Folde
 - give the logic to get book's price and profit separately.
 - give the logics to increase and decrease the price with a certain amount
 - give the logic to calculate price based on cost and profit. For example: cost 14, profit 0.3 => expected price is 20.
-
+ 
 Complete class TaxableBook:
 - inherit Book, but have 1 more private parameter in the constructor: taxRate.
 - give the logic to calculate price with taxRate. For example:
