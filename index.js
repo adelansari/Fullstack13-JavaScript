@@ -141,7 +141,9 @@ const createCountryInfo = (data, args) => {
     const countryFlag = document.createElement('img');
     const flagSrc = data.flags.png;
     countryFlag.src = flagSrc;
-    countryFlag.style.maxWidth = "90%"
+    countryFlag.style.maxWidth = "95%"
+    countryFlag.style.width = "300px"
+    countryFlag.style.height = "200px"
     const countryName = document.createElement('h2');
     countryName.innerHTML = `${data.name.common} ${data.flag}`;
     switch (args) {
