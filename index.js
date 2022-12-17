@@ -107,7 +107,7 @@ searchBtn.addEventListener('click', (e) => {
 })
 
 // After everything is loaded
-window.onload = function () {
+setTimeout(() => {
     // Extracting a country name by click
     let idCountry = document.querySelectorAll('.all-countries__result__country');
     ['click', 'touchend'].forEach(clickEvent => {
@@ -119,7 +119,7 @@ window.onload = function () {
             getSingleCountry(countryClicked);  // show the country in the single country search container
         }))
     })
-}
+},'1000')
 
 const getSingleCountry = (countryInput) => {
     /* provide your code here */
