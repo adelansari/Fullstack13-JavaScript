@@ -110,7 +110,7 @@ searchBtn.addEventListener('click', (e) => {
 window.onload = function () {
     // Extracting a country name by click
     let idCountry = document.querySelectorAll('.all-countries__result__country');
-    ['click', 'touchend'].forEach(clickEvent => {
+    ['click', 'touchstart'].forEach(clickEvent => {
         idCountry.forEach(element => element.addEventListener(clickEvent, () => {
             searchInput.removeAttribute("style")
             let countryClicked = element.lastChild.innerHTML.split("<")[0]
