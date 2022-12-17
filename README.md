@@ -22,6 +22,7 @@ Check out my website here: https://adelansari.github.io/Fullstack13-JavaScript/
 ```
 📦.
  ┣ 📂assets
+ ┃ ┣ 📜countriesOnPhone.png
  ┃ ┣ 📜countrySearchFail.JPG
  ┃ ┣ 📜countrySearchNoInput.JPG
  ┃ ┣ 📜countrySearchSuccess.JPG
@@ -41,13 +42,16 @@ Check out my website here: https://adelansari.github.io/Fullstack13-JavaScript/
 The webpage searches for city name according to the user input, as well as displays all country names and flags. You can also display more about each country by clicking on them!
 
 ### Default view:
-<p align="center"><img src="assets/defaultCountryView.JPG" alt="default-view"/></p>
+<p align="center"><img src="assets/defaultCountryView.JPG" alt="default-view-PC"/></p>
 
 ### Result from seaching a country name:
-<p align="center"><img src="assets/countrySearchSuccess.JPG" alt="fetched-country"/></p>
+<p align="center"><img src="assets/countrySearchSuccess.JPG" alt="fetched-country-PC"/></p>
 
 ### Error if country name is not found:
-<p align="center"><img src="assets/countrySearchFail.JPG" alt="failed-fetch"/></p>
+<p align="center"><img src="assets/countrySearchFail.JPG" alt="failed-fetch-PC"/></p>
 
 ### Error if input box is empty:
-<p align="center"><img src="assets/countrySearchNoInput.JPG" alt="empty-input"/></p>
+<p align="center"><img src="assets/countrySearchNoInput.JPG" alt="empty-input-PC"/></p>
+
+### On mobile phone:
+<p align="center"><img src="assets/countriesOnPhone.png" alt="mobile-phone-view"/></p>
