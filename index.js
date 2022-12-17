@@ -114,7 +114,7 @@ setTimeout(() => {
         e.preventDefault()
         searchInput.removeAttribute("style")
         let countryClicked = element.lastChild.innerHTML.split("<")[0]
-        window.scrollTo(0, 0);  // scroll to the top of the page
+        scrollTo(0, 0);  // scroll to the top of the page
         getSingleCountry(countryClicked);  // show the country in the single country search container
     }))
 }, '1000')
