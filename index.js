@@ -110,12 +110,14 @@ searchBtn.addEventListener('click', (e) => {
 window.onload = function () {
     // Extracting a country name by click
     let idCountry = document.querySelectorAll('.all-countries__result__country');
-    idCountry.forEach(element => element.addEventListener('click', function(){
-        searchInput.removeAttribute("style")
-        let countryClicked = element.lastChild.innerHTML.split("<")[0]
-        window.scrollTo(0, 0);  // scroll to the top of the page
-        getSingleCountry(countryClicked);  // show the country in the single country search container
-    }))
+    ['click', 'touchend'].forEach(function(clickEvent) {
+        idCountry.forEach(element => element.addEventListener(clickEvent, function(){
+            searchInput.removeAttribute("style")
+            let countryClicked = element.lastChild.innerHTML.split("<")[0]
+            window.scrollTo(0, 0);  // scroll to the top of the page
+            getSingleCountry(countryClicked);  // show the country in the single country search container
+        }))
+    })
 }
 
 const getSingleCountry = (countryInput) => {
