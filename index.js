@@ -110,16 +110,14 @@ searchBtn.addEventListener('click', (e) => {
 setTimeout(() => {
     // Extracting a country name by click
     let idCountry = document.querySelectorAll('.all-countries__result__country');
-    ['click', 'touchend'].forEach(clickEvent => {
-        idCountry.forEach(element => element.addEventListener(clickEvent, (e) => {
-            e.preventDefault()
-            searchInput.removeAttribute("style")
-            let countryClicked = element.lastChild.innerHTML.split("<")[0]
-            window.scrollTo(0, 0);  // scroll to the top of the page
-            getSingleCountry(countryClicked);  // show the country in the single country search container
-        }))
-    })
-},'1000')
+    idCountry.forEach(element => element.addEventListener('click', (e) => {
+        e.preventDefault()
+        searchInput.removeAttribute("style")
+        let countryClicked = element.lastChild.innerHTML.split("<")[0]
+        window.scrollTo(0, 0);  // scroll to the top of the page
+        getSingleCountry(countryClicked);  // show the country in the single country search container
+    }))
+}, '1000')
 
 const getSingleCountry = (countryInput) => {
     /* provide your code here */
