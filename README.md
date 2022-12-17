@@ -1,5 +1,4 @@
 # JavaScript Assignment
-
 ![HTML5](https://img.shields.io/badge/HTML-v.5-E34F26?logo=HTML5)
 ![css](https://img.shields.io/badge/css-1572B6?logo=CSS3)
 ![js](https://img.shields.io/badge/JS-gray?logo=JavaScript)
@@ -15,13 +14,11 @@ Check out my website here: https://adelansari.github.io/Fullstack13-JavaScript/
   - [Result](#result)
 
 ## Technologies
-
 - HTML5
 - CSS
 - JS
 
 ## Project structure
-
 ```
 📦.
  ┣ 📂assets
@@ -37,11 +34,11 @@ Check out my website here: https://adelansari.github.io/Fullstack13-JavaScript/
 ```
 
 ## Getting Started
-
 - Clone the repository: `git clone`
 - Open index.html with "Live Server".
 
 ## Result
+The webpage searches for city name according to the user input, as well as displays all country names and flags. You can also display more about each country by clicking on them!
 
 ### Default view:
 <p align="center"><img src="assets/defaultCountryView.JPG" alt="default-view"/></p>
