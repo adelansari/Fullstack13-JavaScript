@@ -116,10 +116,12 @@ const getSingleCountry = (countryInput) => {
         .then(res => res.json())
         .then((data) => {
             // first column: embeding google map:
-            var ifrmMap = document.createElement("iframe")
+            var mapDiv = document.createElement('div')
+            var ifrmMap = document.createElement('iframe')
             ifrmMap.src = `https://maps.google.com/maps?hl=en&q=${data[0].name.common}&output=embed`;
-            ifrmMap.className = "result__map"
-            singleCountryResult.append(ifrmMap)
+            ifrmMap.className = "single-country__result__map"
+            mapDiv.append(ifrmMap)
+            singleCountryResult.append(mapDiv)
 
             // second column: country info
             const divSingle = createCountryInfo(data[0], 'single');
@@ -139,6 +141,7 @@ const createCountryInfo = (data, args) => {
     const countryFlag = document.createElement('img');
     const flagSrc = data.flags.png;
     countryFlag.src = flagSrc;
+    countryFlag.style.maxWidth = "90%"
     const countryName = document.createElement('h2');
     countryName.innerHTML = `${data.name.common} ${data.flag}`;
     switch (args) {
@@ -150,12 +153,12 @@ const createCountryInfo = (data, args) => {
             const countryFullName = document.createElement('h3');
             countryFullName.innerHTML = `${data.name.official}`;
             const capital = document.createElement('p');
-            capital.innerHTML = `Capital: <b>${data.capital}</b>`;
+            capital.innerHTML = `Capital: ${data.capital}`;
             const languages = document.createElement('p');
             const allLang = Object.values(data.languages).join(', ')
-            languages.innerHTML = `Languages: <b>${allLang}</b>`;
+            languages.innerHTML = `Languages: ${allLang}`;
             const population = document.createElement('p');
-            population.innerHTML = `Population: <b>${data.population}</b>`;
+            population.innerHTML = `Population: ${(data.population/1e06).toFixed(2)} M`;
             div.append(countryFlag, countryName, countryFullName, capital, languages, population, population);
             div.className = 'single-country__result__country'
             break;
